@@ -1,0 +1,7 @@
+{
+  "name": "Express-NewWaveFest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Krzysztof-G/Express-NewWaveFest.git",
+  "license": "MIT"
+}
