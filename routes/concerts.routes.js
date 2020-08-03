@@ -10,7 +10,7 @@ router.route('/concerts').get((req, res) => {
 });
 
 router.route('/concerts/:id').get((req, res) => {
-    const index = db.concerts.findIndex(item => item.id === req.params.id)
+    const index = db.concerts.findIndex(item => item.id == req.params.id)
     res.json(db.concerts[index]);
 });
 
@@ -38,7 +38,7 @@ router.route('/concerts/:id').put((req, res) => {
         day: req.body.day,
         image: req.body.image
     };
-    const index = db.concerts.findIndex(item => item.id === req.params.id)
+    const index = db.concerts.findIndex(item => item.id == req.params.id)
     db.concerts.splice(index, 1, registration);
     res.json({
         message: 'OK'
@@ -46,7 +46,7 @@ router.route('/concerts/:id').put((req, res) => {
 });
 
 router.route('/concerts/:id').delete((req, res) => {
-    const index = db.concerts.findIndex(item => item.id === req.params.id)
+    const index = db.concerts.findIndex(item => item.id == req.params.id)
     db.concerts.splice(index, 1)
     res.json({
         message: 'OK'
