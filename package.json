@@ -5,7 +5,8 @@
   "repository": "https://github.com/Krzysztof-G/Express-NewWaveFest.git",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "build": "cd client && yarn install && yarn build"
   },
   "dependencies": {
     "cors": "^2.8.5",
