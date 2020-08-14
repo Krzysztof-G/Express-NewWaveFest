@@ -23,6 +23,7 @@ router.route('/seats').post((req, res) => {
         email: req.body.email
     };
     db.seats.push(registration);
+    req.io.emit('seatsUpdated', db.seats)
     res.json({
         message: 'OK'
     });
