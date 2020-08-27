@@ -1,18 +1,24 @@
 const Concert = require('../models/concert.model');
+const Seats = require('../models/seat.model')
 
 exports.getAll = async (req, res) => {
-    try {
-      res.json(await Concert.find().populate('Seat'));
+  try {
+    const concerts = await Concert.find();
+    for (let singleConcert of concerts) {
+      let seats = await Seats.find({ day: singleConcert.day });
+      console.log(seats.length);
+      singleConcert.freeTickets = singleConcert.tickets - seats.length;
     }
-    catch(err) {
-      res.status(500).json({ message: err });
-    }
-  };
+    res.json(concerts);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+};
 
   exports.getId = async (req, res) => {
 
     try {
-      const dep = await Concert.findById(req.params.id).populate('Seat');
+      const dep = await Concert.findById(req.params.id);
       if(!dep) res.status(404).json({ message: 'Not found' });
       else res.json(dep);
     }
@@ -26,8 +32,8 @@ exports.getAll = async (req, res) => {
 
     try {
   
-      const { performer, genre, price, day, image } = req.body;
-      const newConcert = new Concert({ performer, genre, price, day, image });
+      const { performer, genre, price, day, image, freeTickets } = req.body;
+      const newConcert = new Concert({ performer, genre, price, day, image, freeTickets });
       await newConcert.save();
       res.json({ message: 'OK' });
       
@@ -39,10 +45,10 @@ exports.getAll = async (req, res) => {
 
   exports.putId = async (req, res) => {
 
-    const { performer, genre, price, day, image } = req.body;
+    const { performer, genre, price, day, image, freeTickets } = req.body;
 
   try {
-    await Concert.updateOne({ _id: req.params.id }, { $set: { performer, genre, price, day, image }});
+    await Concert.updateOne({ _id: req.params.id }, { $set: { performer, genre, price, day, image, freeTickets }});
     res.json({ message: 'OK, You changed:' + dep });
   }
   catch(err) {
