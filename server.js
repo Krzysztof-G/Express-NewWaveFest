@@ -40,7 +40,7 @@ app.use((req, res) => {
   });
 })
 
-mongoose.connect('mongodb+srv://Krzysztof_G:MongoDB1@cluster0.iwv3v.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://Krzysztof_G:MongoDB1@cluster0.iwv3v.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {

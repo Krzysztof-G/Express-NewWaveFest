@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon server",
     "build": "cd client && yarn install && yarn build",
-    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\"",
+    "test": "mocha \"./test/**/*.test.js\"",
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   },
   "dependencies": {

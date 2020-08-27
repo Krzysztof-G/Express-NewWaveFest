@@ -10,22 +10,24 @@ const request = chai.request;
 
 describe('GET /api/concerts', () => {
   before(async () => {
-    const testConOne = new Concert({ performer: 'John Doe', genre: 'Rock', price: 25, day: 1, image: 'test.jpg', tickets: 50 });
+    const testConOne = new Concert({ performer: 'xyz', genre: 'Rock', price: 25, day: 1, image: 'test.jpg', tickets: 50, freeTickets: 50 });
     await testConOne.save();
-
-    const testConTwo = new Concert({ performer: 'Rebekah Parker', genre: 'R&B', price: 25, day: 1, image: 'test.jpg', tickets: 50 });
-    await testConTwo.save();
   });
 
   after(async () => {
-    await Concert.deleteMany({ performer: 'John Doe' });
+    await Concert.deleteMany({ performer: 'xyz'});
   });
 
   it('/ should return all concerts', async () => {
     const res = await request(server).get('/api/concerts');
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('array');
-    expect(res.body.length).to.be.equal(2);
+  });
+
+  it('/:id should return one concert by :id ', async () => {
+    const res = await request(server).get('/api/concerts/xyz');
+    expect(res.status).to.be.equal(200);
+    expect(res.body).to.be.an('object');
   });
 
 
