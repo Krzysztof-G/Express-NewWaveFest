@@ -25,7 +25,7 @@ describe('GET /api/concerts', () => {
   });
 
   it('/:id should return one concert by :id ', async () => {
-    const res = await request(server).get('/api/concerts/xyz');
+    const res = await request(server).get('/api/concerts/5f481ab98b2f4eebd947f024');
     expect(res.status).to.be.equal(200);
     expect(res.body).to.be.an('object');
   });
