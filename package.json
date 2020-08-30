@@ -5,11 +5,11 @@
   "repository": "https://github.com/Krzysztof-G/Express-NewWaveFest.git",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server",
+    "dev": "nodemon server.js",
     "build": "cd client && yarn install && yarn build",
-    "test": "snyk test && mocha \"./test/**/*.test.js\"",
+    "test": "NODE_ENV=production mocha \"./{,!(node_modules)/**/}*.test.js\"",
     "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
-  },
+    },
   "dependencies": {
     "chai": "4.2.0",
     "chai-http": "4.3.0",

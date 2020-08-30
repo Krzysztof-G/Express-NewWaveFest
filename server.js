@@ -43,7 +43,8 @@ app.use((req, res) => {
   });
 })
 
-mongoose.connect('mongodb+srv://Krzysztof_G:MongoDB1@cluster0.iwv3v.mongodb.net/NewWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+const dbURI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://${process.env.login}:${process.env.password}@cluster0.iwv3v.mongodb.net/NewWaveDB?retryWrites=true&w=majority' : 'mongodb://localhost:27017/NewWaveDB';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
