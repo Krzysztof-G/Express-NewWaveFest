@@ -25,6 +25,6 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
-    "snyk": "^1.386.0"
+    "snyk": "^1.996.0"
   }
 }
